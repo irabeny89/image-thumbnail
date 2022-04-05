@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import config from "../../config";
-export const loginHandler: RequestHandler = async (
+const loginHandler: RequestHandler = async (
   { body: { username } },
   res,
   next
@@ -17,4 +17,6 @@ export const loginHandler: RequestHandler = async (
   } catch (error) {
     next(error);
   }
-};
+}
+
+export default loginHandler

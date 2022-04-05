@@ -1,6 +1,7 @@
 import express from "express";
-import authRouter from "./authRouters";
+import authRoutes from "./authRoutes";
 import errorHandler from "./errorHandler";
+import jsonPatchRoutes from "./jsonPatchRoutes";
 
 // instantiate express server
 const server = express();
@@ -22,8 +23,10 @@ server.use((_, res, next) => {
 // index route
 server.get("/", (_, res) => res.status(200).send("api ok"));
 
-// auth route
-server.use("/api", authRouter);
+// auth routes
+server.use("/api", authRoutes);
+// json patch routes
+server.use("/api", jsonPatchRoutes)
 // error handler
 server.use(errorHandler);
 
