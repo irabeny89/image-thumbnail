@@ -1,15 +1,15 @@
 import { RequestHandler } from "express";
 import config from "../../config";
 const loginHandler: RequestHandler = async (
-  { body: { username } },
+  { body },
   res,
   next
 ) => {
   try {
-    username
+    body?.username
       ? res.json({
           accessToken: (await import("jsonwebtoken")).sign(
-            username,
+            body.username,
             config.secret
           ),
         })
