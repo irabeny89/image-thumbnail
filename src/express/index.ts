@@ -10,7 +10,7 @@ server.disable("x-powered-by");
 // middlewares
 // allow json from client; enabling req.body
 server.use(express.json());
-// debugger
+// logger
 server.use(morgan("dev"))
 // headers middleware;
 server.use((_, res, next) => {
