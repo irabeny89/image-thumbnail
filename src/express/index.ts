@@ -4,6 +4,7 @@ import errorHandler from "./errorHandler";
 import jsonPatchRoutes from "./jsonPatchRoutes";
 import morgan from "morgan"
 import headerHandler from "./headerHandler";
+import thumbnailRoutes from "./thumbnailRoutes";
 // instantiate express server
 const server = express();
 
@@ -22,6 +23,8 @@ server.get("/", (_, res) => res.status(200).send("api ok"));
 server.use("/api", authRoutes);
 // json patch routes
 server.use("/api", jsonPatchRoutes)
+// thumbnail routes
+server.use("/api", thumbnailRoutes)
 
 // error handler
 server.use(errorHandler);

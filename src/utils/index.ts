@@ -10,3 +10,11 @@ export const confirmAuth = async (authorization: string) => {
     throw error;
   }
 };
+
+export const validateInputs = async (
+  authorization: string | undefined,
+  logicCheckBodyProps: boolean
+) =>
+  !!authorization &&
+  !!(await confirmAuth(authorization)) &&
+  logicCheckBodyProps;
