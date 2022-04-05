@@ -2,15 +2,16 @@ import express from "express";
 import authRoutes from "./authRoutes";
 import errorHandler from "./errorHandler";
 import jsonPatchRoutes from "./jsonPatchRoutes";
-
+import morgan from "morgan"
 // instantiate express server
 const server = express();
 
 server.disable("x-powered-by");
-
+// middlewares
 // allow json from client; enabling req.body
 server.use(express.json());
-
+// debugger
+server.use(morgan("dev"))
 // headers middleware;
 server.use((_, res, next) => {
   // CORS - allow all origin
