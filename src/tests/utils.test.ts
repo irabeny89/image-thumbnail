@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { confirmAuth, validateInputs } from "../../utils";
-import config from "../../../config";
+import { confirmAuth, validateInputs } from "../utils";
+import config from "../../config";
 
 describe("utils tests", () => {
   let payload: string, accessToken: string;
