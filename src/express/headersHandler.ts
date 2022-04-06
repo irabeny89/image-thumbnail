@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 
-const headerHandler: RequestHandler = (_, res, next) => {
+const headersHandler: RequestHandler = (_, res, next) => {
   // CORS - allow all origin
   res.setHeader("Access-Control-Allow-Origin", "*");
   // allowed HTTP methods
@@ -8,4 +8,4 @@ const headerHandler: RequestHandler = (_, res, next) => {
   next();
 }
 
-export default headerHandler
+export default headersHandler
