@@ -3,7 +3,7 @@ import authRoutes from "./authRoutes";
 import errorHandler from "./errorHandler";
 import jsonPatchRoutes from "./jsonPatchRoutes";
 import morgan from "morgan"
-import headerHandler from "./headerHandler";
+import headersHandler from "./headersHandler";
 import thumbnailRoutes from "./thumbnailRoutes";
 // instantiate express server
 const server = express();
@@ -14,19 +14,14 @@ server.disable("x-powered-by");
 server.use(express.json());
 // logger
 server.use(morgan("dev"))
-// headers middleware;
-server.use(headerHandler);
+server.use(headersHandler);
 
-// index route
+// routes
 server.get("/", (_, res) => res.status(200).send("api ok"));
-// auth routes
 server.use("/api", authRoutes);
-// json patch routes
 server.use("/api", jsonPatchRoutes)
-// thumbnail routes
 server.use("/api", thumbnailRoutes)
 
-// error handler
 server.use(errorHandler);
 
 export default server;
