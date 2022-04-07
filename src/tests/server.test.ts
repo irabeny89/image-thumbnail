@@ -99,7 +99,7 @@ describe("server test", function () {
       expect(String(_status)).to.match(/^4/);
     });
 
-    it(`request PATCH ${route} with headers & body data to 'add' with patch data; response ok with 2XX status & modified json data`, async () => {
+    it(`request PATCH ${route} with headers & body data to 'add' with patch data; response ok with 2XX status & modified json data.`, async () => {
       const index = 1;
       const patch: PatchType = {
         op: "add",
@@ -116,7 +116,7 @@ describe("server test", function () {
       expect(biscuits[index]).to.be.deep.equal(patch.value);
     });
 
-    it(`request PATCH ${route} with headers & body data to 'remove' with patch data; response ok with 2XX status & modified json data`, async () => {
+    it(`request PATCH ${route} with headers & body data to 'remove' with patch data; response ok with 2XX status & modified json data.`, async () => {
       const patch: PatchType = {
         op: "remove",
         path: "/biscuits/1",
@@ -130,7 +130,7 @@ describe("server test", function () {
       expect(biscuits.length).to.be.equal(json.biscuits.length - 1);
     });
 
-    it(`request PATCH ${route} with headers & body data to 'copy' with patch data; response ok with 2XX status & modified json data`, async () => {
+    it(`request PATCH ${route} with headers & body data to 'copy' with patch data; response ok with 2XX status & modified json data.`, async () => {
       const index = 1,
         to = 2;
       const patch: PatchType = {
@@ -148,7 +148,7 @@ describe("server test", function () {
       expect(biscuits[to]).to.be.deep.equal(json.biscuits[index]);
     });
 
-    it(`request PATCH ${route} with headers & body data to 'move' with patch data; response ok with 2XX status & modified json data`, async () => {
+    it(`request PATCH ${route} with headers & body data to 'move' with patch data; response ok with 2XX status & modified json data.`, async () => {
       const from = "/biscuits",
         to = "/box";
       const patch: PatchType = {
@@ -166,7 +166,7 @@ describe("server test", function () {
       expect(box).to.be.deep.equal(json.biscuits);
     });
 
-    it(`request PATCH ${route} with headers & body data to 'replace' with patch data; response ok with 2XX status & modified json data`, async () => {
+    it(`request PATCH ${route} with headers & body data to 'replace' with patch data; response ok with 2XX status & modified json data.`, async () => {
       const replacement: any[] = [];
       const patch: PatchType = {
         op: "replace",
@@ -182,7 +182,7 @@ describe("server test", function () {
       expect(biscuits).to.be.deep.equal(replacement);
     });
 
-    it(`request PATCH ${route} with headers & body data to 'test' with patch data; response ok with 2XX status & un-modified json data`, async () => {
+    it(`request PATCH ${route} with headers & body data to 'test' with patch data; response ok with 2XX status & un-modified json data.`, async () => {
       const index = 0;
       const patch: PatchType = {
         op: "test",
@@ -199,9 +199,30 @@ describe("server test", function () {
     });
   });
 
-  // describe("thumbnail routes", () => {
-  //   it("fails on invalid inputs; no header & body data", async () => {
-  //     const {} = await testServer.post
-  //   })
-  // })
+  describe("thumbnail routes", () => {
+    const route = "/api/thumbnail",
+      data = { src: "https://unsplash.com/s/photos/software-engineer" };
+
+    let headers: object;
+    before(
+      () =>
+        (headers = {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        })
+    );
+
+    it(`request POST ${route} with no header and/or body data; response fails with 4XX status.`, async () => {
+      // no header and body data
+      const { status } = await testServer.post(route);
+      // headers but no body data
+      const { status: _status } = await testServer.post(route).set(headers);
+      // no headers but body data
+      const { status: __status } = await testServer.post(route).send(data);
+
+      expect(String(status)).to.match(/^4/);
+      expect(String(_status)).to.match(/^4/);
+      expect(String(__status)).to.match(/^4/);
+    });
+  });
 });
