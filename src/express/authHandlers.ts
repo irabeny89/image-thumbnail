@@ -7,7 +7,7 @@ const loginHandler: RequestHandler = async (
 ) => {
   try {
     body?.username
-      ? res.json({
+      ? res.status(200).json({
           accessToken: (await import("jsonwebtoken")).sign(
             body.username,
             config.secret

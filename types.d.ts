@@ -1,11 +1,12 @@
 type PatchType = {
   op: PatchOpsType;
   path: string;
-  value?: string | number | JsonType;
+  value?: any;
+  from?: string;
 };
 
 type PatchOpsType = "add" | "remove" | "replace" | "copy" | "move" | "test";
 
-type JsonType = {
-  [key: string | number]: string | number | Array<string | number | object>;
+export type JsonType = {
+  biscuits: Record<"name", string>[];
 };
